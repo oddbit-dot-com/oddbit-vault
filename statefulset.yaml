@@ -109,6 +109,15 @@ spec:
               name: vault-server-config
             - mountPath: /openbao/file
               name: vault-raft
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: vault
+                topologyKey: kubernetes.io/hostname
       serviceAccountName: vault
       volumes:
         - name: vault-server-config
