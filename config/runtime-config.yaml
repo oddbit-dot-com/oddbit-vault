@@ -14,17 +14,17 @@ auth:
           - http://localhost:8250/oidc/callback
 
 policies:
+  - name: admin
+    rules: |
+      path "*" {
+        capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+      }
   - name: vault-backup
     rules: "path \"sys/storage/raft/snapshot\" {\n  capabilities = [\"read\"]\n}\n"
-  - name: oddnot-writer
+  - name: oddbit-writer
     rules: |
       path "oddbit/*" {
         capabilities = ["read", "list", "create", "delete", "update"]
-      }
-  - name: oddbit-reader
-    rules: |
-      path "oddbit/*" {
-        capabilities = ["read", "list"]
       }
   - name: oddbit-reader
     rules: |
