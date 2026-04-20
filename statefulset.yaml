@@ -91,6 +91,19 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /v1/sys/health?standbyok=true
+              port: 8200
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /v1/sys/health?standbyok=true&uninitcode=200&sealedcode=200
+              port: 8200
+            initialDelaySeconds: 60
+            periodSeconds: 30
           volumeMounts:
             - mountPath: /openbao/config
               name: vault-server-config
