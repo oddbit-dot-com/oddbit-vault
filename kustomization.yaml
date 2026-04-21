@@ -18,13 +18,9 @@ resources:
 
 configMapGenerator:
   - name: vault-server-config
-    options:
-      disableNameSuffixHash: true
     files:
       - config/server-config.json
 
   - name: vault-runtime-config
-    options:
-      disableNameSuffixHash: true
     files:
       - config/runtime-config.yaml
